@@ -87,7 +87,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/bootstrap4-dark-purple/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           }
@@ -120,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "crudpessoajuridica-frontend"
+  "defaultProject": "crudpessoajuridica-frontend",
+  "cli": {
+    "analytics": "3e76d0c0-f0a3-44a8-be4b-aa51f417d2d4"
+  }
 }
