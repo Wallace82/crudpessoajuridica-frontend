@@ -5,10 +5,14 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 
 import { AppComponent } from './app.component';
+import { FormCadastroComponent } from './form-cadastro/form-cadastro.component';
+import { ListCadastroComponent } from './cadasrto/list-cadastro/list-cadastro.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormCadastroComponent,
+    ListCadastroComponent
   ],
   imports: [
     BrowserModule,
