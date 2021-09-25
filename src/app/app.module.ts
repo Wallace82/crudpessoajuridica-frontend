@@ -3,12 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import { AppComponent } from './app.component';
-import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { AppRoutingModule } from './app-routing-module';
-import { ListarEmpresaComponent } from './pages/listar-empresa/listar-empresa.component';
+import { AppComponent } from './app.component';
 
-import { CadastroModule } from './cadastro/cadastro.module';
+import { CadastroModule } from './pages/cadastro.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +17,8 @@ import { CadastroModule } from './cadastro/cadastro.module';
     BrowserAnimationsModule,
     ButtonModule,
     TableModule,
-    CadastroModule
+    CadastroModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
