@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Paginacao } from 'src/app/models/Paginacao';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { PessoaJuridicaFilter } from 'src/app/models/PessoaJuridicaFilter';
 import { TipoEmpresaDTO } from 'src/app/models/TipoEmpresaDTO';
@@ -11,6 +12,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 export class ListarEmpresaComponent implements OnInit {
  
   isLoading = false;
+  paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
   empresaFiltro: PessoaJuridicaFilter = new PessoaJuridicaFilter;
@@ -28,18 +30,16 @@ export class ListarEmpresaComponent implements OnInit {
 
      this.empresaService
      .listarFiltroEmpresa(this.empresaFiltro)
-     .subscribe(  retorno =>  this.empresas  = retorno);
-   
-
+     .subscribe(  retorno =>  {
+       this.paginacao  = retorno
+       this.empresas = this.paginacao.content;
+      }
+      );
   }
 
   constructor( 
     private empresaService: EmpresaService
     ){
-
-
-   
-
 
   }
 

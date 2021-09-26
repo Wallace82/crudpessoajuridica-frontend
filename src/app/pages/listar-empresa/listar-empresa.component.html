@@ -61,7 +61,7 @@
                                 <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" styleClass="p-button-text"></p-button>
                             </div>
                             <p-table [value]="empresas" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first" responsiveLayout="scroll"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th>Id</th>
@@ -90,7 +90,7 @@
 
 
                     <ng-template pTemplate="footer">
-                        <p-paginator [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+                        <p-paginator [rows]="5" [totalRecords]="120" [rowsPerPageOptions]="[5,10,15]"></p-paginator>
                     </ng-template>
                 </p-panel>
             </ng-template>

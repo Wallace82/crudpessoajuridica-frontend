@@ -15,8 +15,6 @@ import { CadastroModule } from './pages/cadastro.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ButtonModule,
-    TableModule,
     CadastroModule,
     AppRoutingModule,
   ],
