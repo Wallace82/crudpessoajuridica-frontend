@@ -7,7 +7,7 @@
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="number" id="inputtext" pInputText formControlName="cnpj"/>
+                                <p-inputMask  mask="99.999.999/9999-99" formControlName="cnpj" autocomplete="off"></p-inputMask>
                                 <label for="inputtext">CNPJ<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
@@ -25,14 +25,14 @@
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="nome"/>
+                                <input type="text" id="inputtext" pInputText formControlName="nome" autocomplete="off"/>
                                 <label for="inputtext">Nome da Empresa<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="razaoSocial"/>
+                                <input type="text" id="inputtext" pInputText formControlName="razaoSocial" autocomplete="off"/>
                                 <label for="inputtext">Razão Social<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
@@ -42,13 +42,13 @@
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="contato"/>
+                                <p-inputMask  mask="(99)99999-9999" formControlName="cnpj" formControlName="contato" autocomplete="off"></p-inputMask>
                                 <label for="inputtext">Contato<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="email"/>
+                                <input type="text" id="inputtext" pInputText formControlName="email" />
                                 <label for="inputtext">E-mail<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
@@ -57,7 +57,7 @@
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-4 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="enderecoCep"/>
+                                <p-inputMask  mask="99.999-999" formControlName="cnpj" formControlName="enderecoCep"></p-inputMask>
                                 <label for="inputtext">CEP<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="p-field p-col-2 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="enderecoUf"/>
+                                <input type="text" id="inputtext" pInputText formControlName="enderecoUf" autocomplete="off"/>
                                 <label for="inputtext">UF<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
@@ -117,7 +117,6 @@
                             <div class="p-mt-6"> <button pButton type="submit" label="Salvar"
                                     class="p-button-sm" ></button>
                             </div>
-
                         </div>
                     </form>
 

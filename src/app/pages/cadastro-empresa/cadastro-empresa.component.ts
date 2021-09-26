@@ -58,10 +58,14 @@ export class CadastroEmpresaComponent implements OnInit {
   onSubmit() {
     var tipoEmpresaDto = this.empresaForm.get('tipoEmpresa')?.value;
     var tipoEmpresa = TipoEmpresa.MATRIZ;
-    console.log(TipoEmpresa.MATRIZ);
-    console.log(tipoEmpresaDto);
+    var cep = this.empresaForm.get('enderecoCep')?.value.replace(/\D+/g, '');
+    var contato = this.empresaForm.get('contato')?.value.replace(/\D+/g, '');
+    var cnpj = this.empresaForm.get('cnpj')?.value.replace(/\D+/g, '');
     if (tipoEmpresaDto === 'FILIAL') tipoEmpresa = TipoEmpresa.FILIAL;
     this.empresaForm.get('tipoEmpresa')?.setValue(tipoEmpresa);
+    this.empresaForm.get('enderecoCep')?.setValue(cep);
+    this.empresaForm.get('contato')?.setValue(contato);
+    this.empresaForm.get('cnpj')?.setValue(cnpj);
     console.log(this.empresaForm.get('tipoEmpresa')?.value);
     console.log(this.empresaForm.value);
     this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(respose => {
@@ -72,7 +76,8 @@ export class CadastroEmpresaComponent implements OnInit {
 
   cep() {
     var cep = this.empresaForm.get('enderecoCep')?.value;
-    console.log(this.empresaForm.get('enderecoCep')?.value);
+    cep = cep.replace(/\D+/g, '');
+    console.log(cep);
     this.isLoading = true;
     this.cEPService.getCEP(cep).subscribe(response => {
       console.log(response);
