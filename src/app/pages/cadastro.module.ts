@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { ListarEmpresaComponent } from './listar-empresa/listar-empresa.component';
 import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.component';
 import { PrimengModule } from '../primeng/primeng.module';
+import {RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { PrimengModule } from '../primeng/primeng.module';
     imports: [ 
     HttpClientModule,
         CommonModule,
-        PrimengModule
+        PrimengModule,
+        RouterModule,
+        ReactiveFormsModule
     ]
 })
 export class CadastroModule{

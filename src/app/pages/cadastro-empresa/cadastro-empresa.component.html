@@ -1,1 +1,119 @@
-<p>cadastro-empresa works!</p>
+<div class="p-jc-center p-grid vertical-container">
+    <div class="p-col-6">
+        <p-card class="p-shadow-10 ">
+            <ng-template pTemplate="header">
+                <p-panel header="Formulário para Cadastro">
+                    <!-- <form [formGroup]="passwordForm"> -->
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">CNPJ<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-6">
+                                <span class="p-float-label">
+                                    <p-dropdown [autoDisplayFirst]="false" [options]="cities" [(ngModel)]="selectedCity" 
+                                        [showClear]="true" optionLabel="label" optionValue="label"></p-dropdown>
+                                        <label for="inputtext">Tipo de Empresa<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Nome da Empresa<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Razão Social<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Contato<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">E-mail<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-4 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">CEP<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-2 ">
+                                <button pButton type="button" label="Buscar CEP" icon="pi pi-check"
+                                    [loading]="isLoading" (click)="cep($event)" class="p-button-sm"></button>
+                            </div>
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Estado<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Bairro<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Cidade<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Logradouro<span class="asteristico-obrigatoriedade">*</span></label>
+                                </span>
+                            </div>
+                            <div class="p-field p-col-6 ">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText />
+                                    <label for="inputtext">Complemento</label>
+                                </span>
+                            </div>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <div class="p-d-flex p-jc-between">
+                                <div class="p-mt-6"> <button pButton type="button" label="Listas de Empresas"
+                                        class="p-button-sm" routerLink="/"></button>
+                                </div>
+                                <div class="p-mt-6"> <button pButton type="submit" label="Salvar"
+                                        icon="pi pi-plus-circle" class="p-button-sm"></button>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    <!-- </form> -->
+
+
+                </p-panel>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

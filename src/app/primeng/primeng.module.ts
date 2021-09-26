@@ -7,7 +7,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,7 +19,8 @@ import {TableModule} from 'primeng/table';
     PanelModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    DropdownModule
  ],
 })
 export class PrimengModule { }
