@@ -10,8 +10,7 @@ import { EmpresaService } from './../../services/empresa.service';
 
 @Component({
   selector: 'app-cadastro-empresa',
-  templateUrl: './cadastro-empresa.component.html',
-  styleUrls: ['./cadastro-empresa.component.css']
+  templateUrl: './cadastro-empresa.component.html'
 })
 export class CadastroEmpresaComponent implements OnInit {
 
@@ -74,7 +73,7 @@ export class CadastroEmpresaComponent implements OnInit {
   }
 
 
-  cep() {
+  cep() {''
     var cep = this.empresaForm.get('enderecoCep')?.value;
     cep = cep.replace(/\D+/g, '');
     console.log(cep);
@@ -85,6 +84,7 @@ export class CadastroEmpresaComponent implements OnInit {
       this.empresaForm.get('enderecoComplemento')?.setValue(response.complemento);
       this.empresaForm.get('enderecoLocalidade')?.setValue(response.localidade);
       this.empresaForm.get('enderecoLogradouro')?.setValue(response.logradouro);
+      this.empresaForm.get('enderecoUf')?.setValue(response.uf);
       this.isLoading = false;
     }, error => {
       this.isLoading = false;
