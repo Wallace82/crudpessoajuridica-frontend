@@ -8,6 +8,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
+import {InputMaskModule} from 'primeng/inputmask';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +22,8 @@ import {DropdownModule} from 'primeng/dropdown';
     InputTextModule,
     ButtonModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    InputMaskModule
  ],
 })
 export class PrimengModule { }

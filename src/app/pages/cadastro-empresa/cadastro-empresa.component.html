@@ -7,7 +7,7 @@
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="cnpj"/>
+                                <input type="number" id="inputtext" pInputText formControlName="cnpj"/>
                                 <label for="inputtext">CNPJ<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
@@ -65,10 +65,16 @@
                             <button pButton type="button" label="Buscar CEP" icon="pi pi-check" [loading]="isLoading"
                                 (click)="cep()" class="p-button-sm"></button>
                         </div>
-                        <div class="p-field p-col-6 ">
+                        <div class="p-field p-col-4 ">
                             <span class="p-float-label">
                                 <input type="text" id="inputtext" pInputText formControlName="enderecoLocalidade"/>
                                 <label for="inputtext">Estado<span class="asteristico-obrigatoriedade">*</span></label>
+                            </span>
+                        </div>
+                        <div class="p-field p-col-2 ">
+                            <span class="p-float-label">
+                                <input type="text" id="inputtext" pInputText formControlName="enderecoUf"/>
+                                <label for="inputtext">UF<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
                     </div>
@@ -99,21 +105,20 @@
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
                                 <input type="text" id="inputtext" pInputText formControlName="enderecoComplemento"/>
-                                <label for="inputtext">Complemento</label>
+                                <label for="inputtext">Complemento<span
+                                    class="asteristico-obrigatoriedade">*</span></label>
                             </span>
                         </div>
                     </div>
-                    <ng-template pTemplate="footer">
                         <div class="p-d-flex p-jc-between">
                             <div class="p-mt-6"> <button pButton type="button" label="Listas de Empresas"
                                     class="p-button-sm" routerLink="/"></button>
                             </div>
                             <div class="p-mt-6"> <button pButton type="submit" label="Salvar"
-                                    class="p-button-sm" [disabled]="!empresaForm.valid"></button>
+                                    class="p-button-sm" ></button>
                             </div>
 
                         </div>
-                    </ng-template>
                     </form>
 
 

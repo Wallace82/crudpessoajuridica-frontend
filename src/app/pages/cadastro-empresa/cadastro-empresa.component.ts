@@ -1,8 +1,11 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { TipoEmpresa } from 'src/app/models/TipoEmpresa';
+import { TipoEmpresaDTO } from 'src/app/models/TipoEmpresaDTO';
 import { CEPService } from './../../services/cep.service';
+import { EmpresaService } from './../../services/empresa.service';
 interface City {
   name: string,
   code: string
@@ -14,23 +17,23 @@ interface City {
 })
 export class CadastroEmpresaComponent implements OnInit {
 
-  tipoEmpresas: TipoEmpresa[];
+  tipoEmpresas: TipoEmpresaDTO[];
 
-  selectedTipoEmpresa!: TipoEmpresa;
+  selectedTipoEmpresa!: TipoEmpresaDTO;
 
   isLoading: boolean = false;
 
   empresaForm!: FormGroup;
 
-  constructor(private cEPService:CEPService) {
+  constructor(private cEPService: CEPService, private empresaService: EmpresaService) {
     this.tipoEmpresas = [
-      {label: 'MATRIZ', value: '0'},
-      {label: 'FILIAL', value: '1'},
+      { label: 'MATRIZ', value: '0' },
+      { label: 'FILIAL', value: '1' },
     ];
     this.createForm(new PessoaJuridica())
-   }
+  }
 
-   createForm(pessoaJuridica: PessoaJuridica) {
+  createForm(pessoaJuridica: PessoaJuridica) {
     this.empresaForm = new FormGroup({
       id: new FormControl(pessoaJuridica.id),
       cnpj: new FormControl(pessoaJuridica.cnpj, [Validators.required]),
@@ -53,18 +56,28 @@ export class CadastroEmpresaComponent implements OnInit {
   }
 
   onSubmit() {
-   
+    var tipoEmpresaDto = this.empresaForm.get('tipoEmpresa')?.value;
+    var tipoEmpresa = TipoEmpresa.MATRIZ;
+    console.log(TipoEmpresa.MATRIZ);
+    console.log(tipoEmpresaDto);
+    if (tipoEmpresaDto === 'FILIAL') tipoEmpresa = TipoEmpresa.FILIAL;
+    this.empresaForm.get('tipoEmpresa')?.setValue(tipoEmpresa);
+    console.log(this.empresaForm.get('tipoEmpresa')?.value);
+    console.log(this.empresaForm.value);
+    this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(respose => {
+      console.log(respose);
+    });
   }
 
 
   cep() {
     var cep = this.empresaForm.get('enderecoCep')?.value;
-  console.log(this.empresaForm.get('enderecoCep')?.value);
+    console.log(this.empresaForm.get('enderecoCep')?.value);
     this.isLoading = true;
     this.cEPService.getCEP(cep).subscribe(response => {
       console.log(response);
       this.empresaForm.get('enderecoBairro')?.setValue(response.bairro);
-      this.empresaForm.get('enderecoComplemento')?.setValue(response.complemento  );
+      this.empresaForm.get('enderecoComplemento')?.setValue(response.complemento);
       this.empresaForm.get('enderecoLocalidade')?.setValue(response.localidade);
       this.empresaForm.get('enderecoLogradouro')?.setValue(response.logradouro);
       this.isLoading = false;
