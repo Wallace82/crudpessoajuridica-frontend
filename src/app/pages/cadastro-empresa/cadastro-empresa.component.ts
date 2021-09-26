@@ -16,6 +16,8 @@ export class CadastroEmpresaComponent implements OnInit {
 
   tipoEmpresas: TipoEmpresaDTO[];
 
+  tiposMatriz: PessoaJuridica[] = [];
+
   selectedTipoEmpresa!: TipoEmpresaDTO;
 
   isLoading: boolean = false;
@@ -30,6 +32,14 @@ export class CadastroEmpresaComponent implements OnInit {
     this.createForm(new PessoaJuridica())
   }
 
+  onChange(event: any) {
+    if(event === 'FILIAL') 
+    this.empresaService.getListaMatriz().subscribe(response => {
+      this.tiposMatriz = response;
+      console.log(response);
+    })
+  }
+
   createForm(pessoaJuridica: PessoaJuridica) {
     this.empresaForm = new FormGroup({
       id: new FormControl(pessoaJuridica.id),
@@ -42,7 +52,7 @@ export class CadastroEmpresaComponent implements OnInit {
       enderecoLogradouro: new FormControl(pessoaJuridica.enderecoLogradouro, [Validators.required]),
       enderecoLocalidade: new FormControl(pessoaJuridica.enderecoLocalidade, [Validators.required]),
       enderecoUf: new FormControl(pessoaJuridica.enderecoUf, [Validators.required]),
-      matrizId: new FormControl(pessoaJuridica.matrizId),
+      matrizId: new FormControl(pessoaJuridica.matrizId, this.tiposMatriz.length > 0 ? [Validators.required]: null),
       nome: new FormControl(pessoaJuridica.nome, [Validators.required]),
       razaoSocial: new FormControl(pessoaJuridica.razaoSocial, [Validators.required]),
       tipoEmpresa: new FormControl(pessoaJuridica.tipoEmpresa, [Validators.required]),

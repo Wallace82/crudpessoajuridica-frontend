@@ -19,7 +19,7 @@
                             <span class="p-float-label ">
                                 <p-dropdown [autoDisplayFirst]="false" [options]="tipoEmpresas"
                                      [showClear]="true" optionLabel="label"
-                                    optionValue="label" formControlName="tipoEmpresa"></p-dropdown>
+                                    optionValue="label" formControlName="tipoEmpresa" (onChange)="onChange($event.value)"></p-dropdown>
                                 <label for="inputtext" class="label-obrigatorio">Tipo de Empresa</label>
                             </span>
                             <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['tipoEmpresa'].dirty && empresaForm.controls['tipoEmpresa'].errors" margin-left>
@@ -44,6 +44,18 @@
                             <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['razaoSocial'].dirty && empresaForm.controls['razaoSocial'].errors" margin-left>
                                 Razão é obrigatória</span>
                         </div>
+                    </div>
+
+                    
+                    <div class="p-field p-col-12" *ngIf="tiposMatriz.length > 0">
+                        <span class="p-float-label ">
+                            <p-dropdown [autoDisplayFirst]="false" [options]="tiposMatriz"
+                                 [showClear]="true" optionLabel="nome"
+                                optionValue="id" formControlName="tipoEmpresa" (onChange)="onChange($event.value)"></p-dropdown>
+                            <label for="inputtext" class="label-obrigatorio">Tipo de Empresa</label>
+                        </span>
+                        <span class="p-float-label validacao-error" *ngIf="tiposMatriz.length > 0 && empresaForm.controls['tipoEmpresa'].dirty && empresaForm.controls['tipoEmpresa'].errors" margin-left>
+                            Tipo de empresa é obrigatória</span>
                     </div>
 
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
