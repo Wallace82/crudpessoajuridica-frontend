@@ -1,15 +1,13 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { TipoEmpresa } from 'src/app/models/TipoEmpresa';
 import { TipoEmpresaDTO } from 'src/app/models/TipoEmpresaDTO';
 import { CEPService } from './../../services/cep.service';
 import { EmpresaService } from './../../services/empresa.service';
-interface City {
-  name: string,
-  code: string
-}
+
+
 @Component({
   selector: 'app-cadastro-empresa',
   templateUrl: './cadastro-empresa.component.html',
@@ -25,7 +23,7 @@ export class CadastroEmpresaComponent implements OnInit {
 
   empresaForm!: FormGroup;
 
-  constructor(private cEPService: CEPService, private empresaService: EmpresaService) {
+  constructor(private cEPService: CEPService, private empresaService: EmpresaService, private router: Router) {
     this.tipoEmpresas = [
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
@@ -56,6 +54,7 @@ export class CadastroEmpresaComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.empresaForm.get('cnpj'));
     var tipoEmpresaDto = this.empresaForm.get('tipoEmpresa')?.value;
     var tipoEmpresa = TipoEmpresa.MATRIZ;
     var cep = this.empresaForm.get('enderecoCep')?.value.replace(/\D+/g, '');
@@ -68,8 +67,9 @@ export class CadastroEmpresaComponent implements OnInit {
     this.empresaForm.get('cnpj')?.setValue(cnpj);
     console.log(this.empresaForm.get('tipoEmpresa')?.value);
     console.log(this.empresaForm.value);
-    this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(respose => {
-      console.log(respose);
+    this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(response => {
+      this.empresaForm.reset();
+      this.router.navigate(['/']);
     });
   }
 

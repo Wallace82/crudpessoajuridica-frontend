@@ -4,13 +4,17 @@
             <ng-template pTemplate="header">
                 <p-panel header="Formulário para Cadastro">
                     <form [formGroup]="empresaForm"  (ngSubmit)="onSubmit()">
+
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
                                 <p-inputMask  mask="99.999.999/9999-99" formControlName="cnpj" autocomplete="off"></p-inputMask>
                                 <label for="inputtext">CNPJ<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['cnpj'].dirty && empresaForm.controls['cnpj'].errors" margin-left>
+                                CNPJ é obrigatório</span>
                         </div>
+
                         <div class="p-field p-col-6">
                             <span class="p-float-label">
                                 <p-dropdown [autoDisplayFirst]="false" [options]="tipoEmpresas"
@@ -19,6 +23,8 @@
                                 <label for="inputtext">Tipo de Empresa<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['tipoEmpresa'].dirty && empresaForm.controls['tipoEmpresa'].errors" margin-left>
+                                Tipo de empresa é obrigatória</span>
                         </div>
                     </div>
 
@@ -29,6 +35,8 @@
                                 <label for="inputtext">Nome da Empresa<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['nome'].errors" margin-left>
+                                Nome é obrigatório</span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
@@ -36,6 +44,8 @@
                                 <label for="inputtext">Razão Social<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['razaoSocial'].dirty && empresaForm.controls['razaoSocial'].errors" margin-left>
+                                Razão é obrigatória</span>
                         </div>
                     </div>
 
@@ -45,37 +55,40 @@
                                 <p-inputMask  mask="(99)99999-9999" formControlName="cnpj" formControlName="contato" autocomplete="off"></p-inputMask>
                                 <label for="inputtext">Contato<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['contato'].dirty && empresaForm.controls['contato'].errors" margin-left>
+                                Contato é obrigatório</span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
                                 <input type="text" id="inputtext" pInputText formControlName="email" />
                                 <label for="inputtext">E-mail<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['email'].dirty && empresaForm.controls['email'].errors" margin-left>
+                                Email é obrigatório</span>
                         </div>
                     </div>
 
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
-                        <div class="p-field p-col-4 ">
+                        <div class="p-field p-col-6 ">
                             <span class="p-float-label">
                                 <p-inputMask  mask="99.999-999" formControlName="cnpj" formControlName="enderecoCep"></p-inputMask>
                                 <label for="inputtext">CEP<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoCep'].dirty && empresaForm.controls['enderecoCep'].errors" margin-left>
+                                CEP é obrigatório</span>
                         </div>
-                        <div class="p-field p-col-2 ">
+                        <div class="p-field p-col-4 ">
                             <button pButton type="button" label="Buscar CEP" icon="pi pi-check" [loading]="isLoading"
                                 (click)="cep()" class="p-button-sm"></button>
                         </div>
-                        <div class="p-field p-col-4 ">
-                            <span class="p-float-label">
-                                <input type="text" id="inputtext" pInputText formControlName="enderecoLocalidade"/>
-                                <label for="inputtext">Estado<span class="asteristico-obrigatoriedade">*</span></label>
-                            </span>
-                        </div>
+
                         <div class="p-field p-col-2 ">
                             <span class="p-float-label">
                                 <input type="text" id="inputtext" pInputText formControlName="enderecoUf" autocomplete="off"/>
                                 <label for="inputtext">UF<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoUf'].dirty && empresaForm.controls['enderecoUf'].errors" margin-left>
+                                UF é obrigatório</span>
                         </div>
                     </div>
 
@@ -85,12 +98,16 @@
                                 <input type="text" id="inputtext" pInputText formControlName="enderecoBairro"/>
                                 <label for="inputtext">Bairro<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoBairro'].dirty && empresaForm.controls['enderecoBairro'].errors" margin-left>
+                                Bairro é obrigatório</span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
                                 <input type="text" id="inputtext" pInputText formControlName="enderecoLocalidade"/>
                                 <label for="inputtext">Cidade<span class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoLocalidade'].dirty && empresaForm.controls['enderecoLocalidade'].errors" margin-left>
+                                Cidade é obrigatória</span>
                         </div>
                     </div>
 
@@ -101,6 +118,8 @@
                                 <label for="inputtext">Logradouro<span
                                         class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoLogradouro'].dirty && empresaForm.controls['enderecoLogradouro'].errors" margin-left>
+                                Logradouro é obrigatório</span>
                         </div>
                         <div class="p-field p-col-6 ">
                             <span class="p-float-label">
@@ -108,6 +127,8 @@
                                 <label for="inputtext">Complemento<span
                                     class="asteristico-obrigatoriedade">*</span></label>
                             </span>
+                            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoComplemento'].dirty && empresaForm.controls['enderecoComplemento'].errors" margin-left>
+                                Complemento é obrigatório</span>
                         </div>
                     </div>
                         <div class="p-d-flex p-jc-between">
@@ -115,7 +136,7 @@
                                     class="p-button-sm" routerLink="/"></button>
                             </div>
                             <div class="p-mt-6"> <button pButton type="submit" label="Salvar"
-                                    class="p-button-sm" ></button>
+                                    class="p-button-sm" [disabled]="empresaForm.invalid"></button>
                             </div>
                         </div>
                     </form>
