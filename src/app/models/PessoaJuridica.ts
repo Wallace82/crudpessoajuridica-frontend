@@ -14,4 +14,21 @@ export class PessoaJuridica {
     nome: string = '';
     razaoSocial: string = '';
     tipoEmpresa: string = '';
+
+    constructor() {
+      this.id = 0;
+      this.cnpj = "";
+      this.contato = "";
+      this.email = "";
+      this.enderecoBairro = "";
+      this.enderecoCep = "";
+      this.enderecoComplemento = "";
+      this.enderecoLogradouro = "";
+      this.enderecoLocalidade = "";
+      this.enderecoUf = "";
+      this.matrizId = 0;
+      this.nome = "";
+      this.razaoSocial = "";
+      this.tipoEmpresa = "";
+    }
   }
