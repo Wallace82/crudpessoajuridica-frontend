@@ -11,7 +11,6 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 @Component({
   selector: 'app-listar-empresa',
   templateUrl: './listar-empresa.component.html',
-  providers: [ConfirmationService, MessageService]
 })
 export class ListarEmpresaComponent implements OnInit {
  
@@ -123,10 +122,10 @@ update(id: string) {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
           this.empresaService.deleteEmpresa(id).subscribe(response => {
+            console.log('exclkuido', response)
             this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
             this.getEmpresas();
           }, error => {
-            console.log(error)
             this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
           })
       },
