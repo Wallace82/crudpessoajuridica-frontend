@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Paginacao } from 'src/app/models/Paginacao';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { PessoaJuridicaFilter } from 'src/app/models/PessoaJuridicaFilter';
+import { TipoEmpresa } from 'src/app/models/TipoEmpresa';
 import { TipoEmpresaDTO } from 'src/app/models/TipoEmpresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
 
@@ -16,8 +17,10 @@ export class ListarEmpresaComponent implements OnInit {
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
   empresaFiltro: PessoaJuridicaFilter = new PessoaJuridicaFilter;
-  first = 0;
+  first = 1;
   rows = 5;
+
+  totalRecords = 7
 
   ngOnInit(): void {
 
@@ -27,11 +30,20 @@ export class ListarEmpresaComponent implements OnInit {
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
     ];
-
+    this.empresaFiltro.setValores('','','MATRIZ',0,5);
+    console.log(this.empresaFiltro);
      this.empresaService
      .listarFiltroEmpresa(this.empresaFiltro)
      .subscribe(  retorno =>  {
+      
+
        this.paginacao  = retorno
+
+       console.log(this.paginacao.size);
+       console.log(this.paginacao.totalPages);
+
+       console.log(this.paginacao.totalElements);
+
        this.empresas = this.paginacao.content;
       }
       );

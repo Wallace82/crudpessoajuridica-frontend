@@ -4,6 +4,7 @@ import { API_CONFIG } from '../config/api.config';
 import { PessoaJuridica } from './../models/PessoaJuridica';
 import { PessoaJuridicaFilter } from '../models/PessoaJuridicaFilter';
 import { Paginacao } from '../models/Paginacao';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class EmpresaService {
   }
 
   listarFiltroEmpresa(empresaFilter:PessoaJuridicaFilter) {
-    return this.http.post<Paginacao>(`${API_CONFIG.baseUrl}/cadastro/filtrar`,empresaFilter);
+    return this.http.post<Paginacao>(`${API_CONFIG.baseUrl}/cadastro/filtrar?page=${empresaFilter.page}&size${empresaFilter.size}`,empresaFilter);
   }
 
 

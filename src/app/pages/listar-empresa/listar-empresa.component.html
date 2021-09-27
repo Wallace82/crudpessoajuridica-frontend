@@ -60,7 +60,7 @@
                                 <p-button type="button" icon="pi pi-refresh" (click)="reset()" styleClass="p-button-text"></p-button>
                                 <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" styleClass="p-button-text"></p-button>
                             </div>
-                            <p-table [value]="empresas" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first" responsiveLayout="scroll"
+                            <p-table [value]="paginacao.content" [paginator]="true" [rows]="rows" [showCurrentPageReport]="true" [(first)]="first" 
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,15]">
                                 <ng-template pTemplate="header">
                                     <tr>
@@ -85,12 +85,12 @@
                     </div>
 
                     <div class="p-d-flex p-mt-2 p-jc-start">
-                        <span>Qtd. Registros: 0</span>
+                        <span>Qtd. Registros: {{paginacao.totalElements}}</span>
                     </div>
 
 
                     <ng-template pTemplate="footer">
-                        <p-paginator [rows]="5" [totalRecords]="120" [rowsPerPageOptions]="[5,10,15]"></p-paginator>
+                        <p-paginator [rows]="5" [totalRecords]="paginacao.totalElements" [rowsPerPageOptions]="[5,10,15]"></p-paginator>
                     </ng-template>
                 </p-panel>
             </ng-template>
