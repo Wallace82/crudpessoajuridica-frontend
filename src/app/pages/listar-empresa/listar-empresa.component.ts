@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Paginacao } from 'src/app/models/Paginacao';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { PessoaJuridicaFilter } from 'src/app/models/PessoaJuridicaFilter';
@@ -17,14 +17,19 @@ export class ListarEmpresaComponent implements OnInit {
  
   @Input() empresaFiltro: PessoaJuridicaFilter = new PessoaJuridicaFilter();
   isLoading = false;
+  loading: boolean = false;
   paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
 
+  totalRecords!: number;
+
+    cols!: any[];
+
   empresaFiltroForm!: FormGroup;
   first = 0;
   rows = 50;
-
+  last = 100;
 
   constructor( 
     private empresaService: EmpresaService,
@@ -45,6 +50,20 @@ export class ListarEmpresaComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
+  loadEmpresas(event: LazyLoadEvent) {
+    this.loading = true;
+console.log(event);
+        setTimeout(() => {
+        this.empresaService.listarFiltroEmpresa(this.empresaFiltro).subscribe(retorno =>  {
+            this.paginacao  = retorno
+            this.empresas = this.paginacao.content;
+           
+            this.totalRecords = this.paginacao.totalElements;
+            this.loading = false;
+        }
+     )
+    }, 1000);
+  }
 
  getEmpresas() {
     this.empresaService
@@ -106,7 +125,9 @@ update(id: string) {
   });
   }
 
- 
+  OnPageChange(){
+    console.log("alterou pagina");
+  }
 
   next() {
     this.first = this.first + this.rows;
