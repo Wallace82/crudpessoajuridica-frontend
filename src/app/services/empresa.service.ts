@@ -40,8 +40,9 @@ export class EmpresaService {
   }
 
   listarFiltroEmpresa(empresaFilter:PessoaJuridicaFilter) {
-    return this.http.post<Paginacao>(`${API_CONFIG.baseUrl}/cadastro/filtrar?page=${empresaFilter.page}&size${empresaFilter.size}`,empresaFilter);
+    return this.http.post<Paginacao>(`${API_CONFIG.baseUrl}/cadastro/filtrar?cnpj=${empresaFilter.cnpj.trim()}&nomeEmpresa=${empresaFilter.nomeEmpresa.trim()}&tipoEmpresa= ${empresaFilter.tipoEmpresa==null?'':empresaFilter.tipoEmpresa}&page=${empresaFilter.page}&size${empresaFilter.size}`,empresaFilter);
   }
+
 
 
 

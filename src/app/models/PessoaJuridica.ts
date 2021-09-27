@@ -15,6 +15,7 @@ export class PessoaJuridica {
     razaoSocial: string = '';
     tipoEmpresa: string = '';
 
+    
     constructor() {
       this.id = 0;
       this.cnpj = "";

@@ -1,5 +1,5 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Paginacao } from 'src/app/models/Paginacao';
@@ -10,19 +10,31 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-listar-empresa',
-  templateUrl: './listar-empresa.component.html', 
+  templateUrl: './listar-empresa.component.html',
   providers: [ConfirmationService, MessageService]
 })
 export class ListarEmpresaComponent implements OnInit {
+ 
+  @Input() empresaFiltro: PessoaJuridicaFilter = new PessoaJuridicaFilter();
   isLoading = false;
   paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
-  empresaFiltro: PessoaJuridicaFilter = new PessoaJuridicaFilter;
-  first = 1;
-  rows = 5;
 
-  totalRecords = 7
+  empresaFiltroForm!: FormGroup;
+  first = 0;
+  rows = 50;
+
+
+  constructor( 
+    private empresaService: EmpresaService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private primengConfig: PrimeNGConfig,
+    private messageService: MessageService
+    ){
+      this.createForm();
+  }
 
   ngOnInit(): void {
     this.tipoEmpresas = [
@@ -33,28 +45,43 @@ export class ListarEmpresaComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
 
-  constructor( 
-    private empresaService: EmpresaService,
-  private router: Router,
-  private confirmationService: ConfirmationService,
-  private primengConfig: PrimeNGConfig,
-  private messageService: MessageService
-    ){
 
-  }
-
-  getEmpresas() {
-    this.empresaFiltro.setValores('','','MATRIZ',0,5);
+ getEmpresas() {
     this.empresaService
     .listarFiltroEmpresa(this.empresaFiltro)
-    .subscribe(  retorno =>  {
-      this.paginacao  = retorno
-      this.empresas = this.paginacao.content;
-     }
+        .subscribe(  retorno =>  {
+            this.paginacao  = retorno
+            this.empresas = this.paginacao.content;
+            this.isLoading =false;
+        }
      );
   }
 
-  update(id: string) {
+  createForm() {
+    this.empresaFiltroForm = new FormGroup({
+      cnpj: new FormControl(this.empresaFiltro.cnpj),
+      nomeEmpresa: new FormControl(this.empresaFiltro.nomeEmpresa),
+      tipoEmpresa: new FormControl(this.empresaFiltro.tipoEmpresa),
+    })
+  }
+
+  
+
+  pesquisar() {
+    this.isLoading = !this.isLoading;
+
+    this.empresaFiltro.setValores(
+      this.empresaFiltroForm.get('cnpj')?.value,
+      this.empresaFiltroForm.get('nomeEmpresa')?.value,
+      this.empresaFiltroForm.get('tipoEmpresa')?.value,
+      0,
+      5
+    );
+    
+    this.getEmpresas();
+
+  }
+update(id: string) {
     this.router.navigate(['/editar/', id]);
   }
 
@@ -79,10 +106,7 @@ export class ListarEmpresaComponent implements OnInit {
   });
   }
 
-  pesquisar(event: any) {
-  this.isLoading = !this.isLoading;
-
-  }
+ 
 
   next() {
     this.first = this.first + this.rows;
