@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, LazyLoadEvent, MessageService, PrimeNGConfig } from 'primeng/api';
+
 import { Paginacao } from 'src/app/models/Paginacao';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { PessoaJuridicaFilter } from 'src/app/models/PessoaJuridicaFilter';
@@ -11,6 +12,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 @Component({
   selector: 'app-listar-empresa',
   templateUrl: './listar-empresa.component.html',
+  providers: [ConfirmationService,MessageService]
 })
 export class ListarEmpresaComponent implements OnInit {
  
@@ -105,14 +107,16 @@ update(id: string) {
   }
 
   delete(id: string) {
-    console.log('entrando')
+    
     this.confirmationService.confirm({
       message: 'Deletar empresa?',
       header: 'Deletar',
       icon: 'pi pi-exclamation-triangle',
+      rejectLabel:'Não',
+      acceptLabel:'Sim, deletar',
       accept: () => {
           this.empresaService.deleteEmpresa(id).subscribe(response => {
-            console.log('exclkuido', response)
+          
             this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
             this.getEmpresas();
           }, error => {
