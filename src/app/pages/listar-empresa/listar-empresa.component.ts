@@ -21,15 +21,9 @@ export class ListarEmpresaComponent implements OnInit {
   paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
-  
-
   totalRecords: number = 0;
-
-    cols!: any[];
-
   empresaFiltroForm!: FormGroup;
   first = 0;
-
 
   constructor( 
     private empresaService: EmpresaService,
@@ -42,13 +36,7 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    
-
   this.loading = true;
-
-
-
     this.tipoEmpresas = [
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
@@ -59,11 +47,14 @@ export class ListarEmpresaComponent implements OnInit {
 
   loadEmpresas(event: LazyLoadEvent) {
     this.loading = true;
-     
-      this.empresaFiltro.page  =  (event.first==null?0:event.first/5);
-      this.empresaFiltro.size  =  event.rows;
-
-      console.log(event);
+      this.empresaFiltro.setValores(
+        this.empresaFiltroForm.get('cnpj')?.value,
+        this.empresaFiltroForm.get('nomeEmpresa')?.value,
+        this.empresaFiltroForm.get('tipoEmpresa')?.value,
+        (event.first==null?0:event.first/5),
+        event.rows
+      );
+      
         setTimeout(() => {
         this.empresaService.listarFiltroEmpresa(this.empresaFiltro).subscribe(retorno =>  {
           
@@ -76,12 +67,27 @@ export class ListarEmpresaComponent implements OnInit {
     }, 1000);
   }
 
+  pesquisar() {
+    this.isLoading = !this.isLoading;
+    this.empresaFiltro.setValores(
+    this.empresaFiltroForm.get('cnpj')?.value,
+    this.empresaFiltroForm.get('nomeEmpresa')?.value,
+    this.empresaFiltroForm.get('tipoEmpresa')?.value,
+    0,
+    5
+  );
+  
+  this.getEmpresas();
+}
+
  getEmpresas() {
     this.empresaService
     .listarFiltroEmpresa(this.empresaFiltro)
         .subscribe(  retorno =>  {
-            this.paginacao  = retorno
-            this.empresas = this.paginacao.content;
+          this.paginacao  = retorno
+          this.empresas = this.paginacao.content;
+          this.totalRecords = this.paginacao.totalElements;
+          this.loading = false;
             this.isLoading =false;
         }
      );
@@ -94,23 +100,7 @@ export class ListarEmpresaComponent implements OnInit {
       tipoEmpresa: new FormControl(this.empresaFiltro.tipoEmpresa),
     })
   }
-
-  
-
-  pesquisar() {
-    this.isLoading = !this.isLoading;
-
-    this.empresaFiltro.setValores(
-      this.empresaFiltroForm.get('cnpj')?.value,
-      this.empresaFiltroForm.get('nomeEmpresa')?.value,
-      this.empresaFiltroForm.get('tipoEmpresa')?.value,
-      '0',
-      '5'
-    );
-    
-    this.getEmpresas();
-
-  }
+ 
 update(id: string) {
     this.router.navigate(['/editar/', id]);
   }
