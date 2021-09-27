@@ -1,12 +1,13 @@
 <div class="p-jc-center p-grid vertical-container">
+
     <div class="p-col-10">
         <p-card class="p-shadow-10 ">
             <ng-template pTemplate="header">
-                <p-panel header="Cadastro de Empresas">
+                <p-panel header="Lista de Empresas">
                    
                     <div class="p-d-flex p-jc-between">
                         <h3>Empresas Cadastradas</h3>
-                        
+
                     </div>
                     <form [formGroup]="empresaFiltroForm" >
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
@@ -38,6 +39,8 @@
                 </div>
                 <div class="p-fluid p-grid p-mt-2 p-mr-5 p-d-flex p-jc-center">
                             <div class="p-d-flex p-jc-center"> 
+                                <p-toast></p-toast>
+                                <p-confirmPopup></p-confirmPopup>
                                 <button pButton type="button" label="Novo Cadastro" 
                                 icon="pi pi-plus-circle" class="p-button-sm" 
                                 routerLink="/cadastrar">
