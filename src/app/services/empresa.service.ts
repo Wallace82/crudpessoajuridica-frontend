@@ -30,6 +30,10 @@ export class EmpresaService {
     return this.http.get<PessoaJuridica[]>(`${API_CONFIG.baseUrl}/cadastro/matrizes`);
   }
 
+  getEmpresaId(id: string | null): Observable<PessoaJuridica> {
+    return this.http.get<PessoaJuridica>(`${API_CONFIG.baseUrl}/cadastro/${id}`);
+  }
+
   listarFiltroEmpresa(empresaFilter:PessoaJuridicaFilter) {
     return this.http.post<Paginacao>(`${API_CONFIG.baseUrl}/cadastro/filtrar?page=${empresaFilter.page}&size${empresaFilter.size}`,empresaFilter);
   }
