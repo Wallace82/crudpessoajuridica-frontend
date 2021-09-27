@@ -29,16 +29,16 @@ export class FormularioEmpresasComponent implements OnInit {
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
     ];
-   }
+  }
 
-   
+
   ngOnInit(): void {
     console.log(this.pessoaJuridica);
     console.log('imprimindo input');
     this.createForm(this.pessoaJuridica)
   }
 
-   
+
 
   createForm(pessoaJuridica: PessoaJuridica) {
     this.empresaForm = new FormGroup({
@@ -59,7 +59,7 @@ export class FormularioEmpresasComponent implements OnInit {
     })
   }
 
-  
+
   onSubmit() {
     console.log(this.empresaForm.get('cnpj'));
     var tipoEmpresaDto = this.empresaForm.get('tipoEmpresa')?.value;
@@ -74,13 +74,26 @@ export class FormularioEmpresasComponent implements OnInit {
     this.empresaForm.get('cnpj')?.setValue(cnpj);
     console.log(this.empresaForm.get('tipoEmpresa')?.value);
     console.log(this.empresaForm.value);
-    this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(response => {
-      this.empresaForm.reset();
-      this.router.navigate(['/']);
-    });
+    console.log(this.pessoaJuridica.id);
+    console.log(this.pessoaJuridica.id > 0);
+
+    if (this.pessoaJuridica.id > 0) {
+      console.log('ebtrabdi no editar')
+      this.empresaService.editarEmpresa(this.empresaForm.value).subscribe(response => {
+        this.empresaForm.reset();
+        this.router.navigate(['/']);
+      });
+    } else {
+      console.log('ebtrabdi no salbar')
+      this.empresaService.salvandoEmpresa(this.empresaForm.value).subscribe(response => {
+        this.empresaForm.reset();
+        this.router.navigate(['/']);
+      });
+
+    }
   }
 
-  
+
 
   cep() {
     var cep = this.empresaForm.get('enderecoCep')?.value;
@@ -100,15 +113,15 @@ export class FormularioEmpresasComponent implements OnInit {
     })
   }
 
-   onChange(event: any) {
+  onChange(event: any) {
 
     console.log(event);
-    if(event === 'FILIAL') {
-      this.empresaService.getListaMatriz().subscribe(response => {
+    if (event === 'FILIAL') {
+      this.empresaService.getListaMatriz().subscribe((response: any) => {
         this.tiposMatriz = response;
         console.log(response);
       })
-    } else if(event === 'MATRIZ'){
+    } else if (event === 'MATRIZ') {
       this.tiposMatriz.length = 0;
     }
   }
