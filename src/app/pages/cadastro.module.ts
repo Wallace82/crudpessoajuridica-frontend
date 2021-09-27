@@ -20,7 +20,7 @@ import { EditarEmpresaComponent } from './editar-empresa/editar-empresa.componen
     exports: [ 
      ],
     imports: [ 
-    HttpClientModule,
+        HttpClientModule,
         CommonModule,
         PrimengModule,
         RouterModule,
