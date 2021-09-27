@@ -42,7 +42,7 @@ export class FormularioEmpresasComponent implements OnInit {
     this.empresaForm = new FormGroup({
       id: new FormControl(pessoaJuridica.id),
       cnpj: new FormControl(pessoaJuridica.cnpj, [Validators.required]),
-      contato: new FormControl(pessoaJuridica.contato, [Validators.required, Validators.max(40)]),
+      contato: new FormControl(pessoaJuridica.contato, [Validators.required]),
       email: new FormControl(pessoaJuridica.email, [Validators.required, Validators.email, Validators.max(40)]),
       enderecoBairro: new FormControl(pessoaJuridica.enderecoBairro, [Validators.required, Validators.max(40)]),
       enderecoCep: new FormControl(pessoaJuridica.enderecoCep, [Validators.required]),
