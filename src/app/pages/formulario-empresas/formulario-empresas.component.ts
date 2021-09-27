@@ -47,7 +47,7 @@ export class FormularioEmpresasComponent implements OnInit {
       enderecoBairro: new FormControl(pessoaJuridica.enderecoBairro, [Validators.required, Validators.max(40)]),
       enderecoCep: new FormControl(pessoaJuridica.enderecoCep, [Validators.required]),
       enderecoComplemento: new FormControl(pessoaJuridica.enderecoComplemento, Validators.max(40)),
-      enderecoLogradouro: new FormControl(pessoaJuridica.enderecoLogradouro, [Validators.required, Validators.max(450)]),
+      enderecoLogradouro: new FormControl(pessoaJuridica.enderecoLogradouro, [Validators.required, Validators.max(40)]),
       enderecoLocalidade: new FormControl(pessoaJuridica.enderecoLocalidade, [Validators.required, Validators.max(40)]),
       enderecoUf: new FormControl(pessoaJuridica.enderecoUf, [Validators.required]),
       matrizId: new FormControl(pessoaJuridica.matrizId, [Validators.required]),
