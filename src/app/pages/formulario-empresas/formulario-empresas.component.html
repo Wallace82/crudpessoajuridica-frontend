@@ -38,19 +38,34 @@
     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
         <div class="p-field p-col-12 ">
             <span class="p-float-label ">
-                <input type="text" id="inputtext" pInputText formControlName="nome" autocomplete="off"/>
+                <input type="text" id="inputtext" pInputText formControlName="nome" (change)='teste()'  autocomplete="off"/>
                 <label for="inputtext" class="label-obrigatorio">Nome da Empresa</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['nome'].errors" margin-left>
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['nome'].errors && empresaForm.controls['nome'].value == ''" 
+            margin-left>
                 Nome é obrigatório</span>
+
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['nome'].errors && empresaForm.controls['nome'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 50</span>
+
         </div>
         <div class="p-field p-col-12 ">
             <span class="p-float-label">
-                <input type="text" id="inputtext" pInputText formControlName="razaoSocial" autocomplete="off"/>
+                <input type="text" id="inputtext" pInputText formControlName="razaoSocial" (change)='teste()'  autocomplete="off"/>
                 <label for="inputtext" class="label-obrigatorio" >Razão Social</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['razaoSocial'].dirty && empresaForm.controls['razaoSocial'].errors" margin-left>
-                Razão é obrigatória</span>
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['razaoSocial'].errors && empresaForm.controls['razaoSocial'].value == ''" 
+            margin-left>
+            Razao Social é obrigatório</span>
+
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['razaoSocial'].errors && empresaForm.controls['razaoSocial'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
         </div>
     </div>
 
@@ -68,8 +83,19 @@
                 <input type="text" id="inputtext" pInputText formControlName="email" />
                 <label for="inputtext" class="label-obrigatorio" >E-mail</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['email'].dirty && empresaForm.controls['email'].errors" margin-left>
-                Email é obrigatório</span>
+
+
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['nome'].dirty && empresaForm.controls['email'].errors && empresaForm.controls['email'].value == ''" 
+            margin-left>
+            Email é obrigatório</span>
+
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['email'].dirty && empresaForm.controls['email'].errors && empresaForm.controls['email'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
+
+            
         </div>
     </div>
 
@@ -95,8 +121,18 @@
             <input type="text" id="enderecoUf" pInputText formControlName="enderecoUf" autocomplete="off"/>
             <label for="inputtext" class="label-obrigatorio" >UF</label>
         </span>
-        <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoUf'].dirty && empresaForm.controls['enderecoUf'].errors" margin-left>
-            UF é obrigatório</span>
+
+        <span class="p-float-label validacao-error" 
+        *ngIf="empresaForm.controls['enderecoUf'].dirty && empresaForm.controls['enderecoUf'].errors && empresaForm.controls['enderecoUf'].value == ''" 
+        margin-left>
+        UF é obrigatório</span>
+
+            <span class="p-float-label validacao-error" 
+        *ngIf="empresaForm.controls['enderecoUf'].dirty && empresaForm.controls['enderecoUf'].errors && empresaForm.controls['enderecoUf'].value != '' " 
+        margin-left>
+            Tamanho máximo do campo 40</span>
+
+        
     </div>
 
    
@@ -105,8 +141,18 @@
                 <input type="text" id="inputtext" pInputText formControlName="enderecoBairro"/>
                 <label for="inputtext" class="label-obrigatorio" >Bairro</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoBairro'].dirty && empresaForm.controls['enderecoBairro'].errors" margin-left>
-                Bairro é obrigatório</span>
+
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoBairro'].dirty && empresaForm.controls['enderecoBairro'].errors && empresaForm.controls['enderecoBairro'].value == ''" 
+            margin-left>
+            Bairro é obrigatório</span>
+    
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoBairro'].dirty && empresaForm.controls['enderecoBairro'].errors && empresaForm.controls['enderecoBairro'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
+
+
         </div>
 
 
@@ -120,8 +166,19 @@
                 <input type="text" id="inputtext" pInputText formControlName="enderecoLocalidade"/>
                 <label for="inputtext" class="label-obrigatorio">Cidade</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoLocalidade'].dirty && empresaForm.controls['enderecoLocalidade'].errors" margin-left>
-                Cidade é obrigatória</span>
+
+
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoLocalidade'].dirty && empresaForm.controls['enderecoLocalidade'].errors && empresaForm.controls['enderecoLocalidade'].value == ''" 
+            margin-left>
+            Cidade é obrigatória</span>
+    
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoLocalidade'].dirty && empresaForm.controls['enderecoLocalidade'].errors && empresaForm.controls['enderecoLocalidade'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
+
+            
         </div>
         
         <div class="p-field p-col-6 ">
@@ -129,8 +186,18 @@
                 <input type="text" id="inputtext" pInputText formControlName="enderecoLogradouro"/>
                 <label for="inputtext" class="label-obrigatorio" >Logradouro</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoLogradouro'].dirty && empresaForm.controls['enderecoLogradouro'].errors" margin-left>
-                Logradouro é obrigatório</span>
+
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoLogradouro'].dirty && empresaForm.controls['enderecoLogradouro'].errors && empresaForm.controls['enderecoLogradouro'].value == ''" 
+            margin-left>
+            Logradouro é obrigatório</span>
+    
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoLogradouro'].dirty && empresaForm.controls['enderecoLogradouro'].errors && empresaForm.controls['enderecoLogradouro'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
+
+            
         </div>
        
     </div>
@@ -141,8 +208,17 @@
                 <input type="text" id="enderecoComplemento" pInputText formControlName="enderecoComplemento"/>
                 <label for="enderecoComplemento" class="label-obrigatorio">Complemento</label>
             </span>
-            <span class="p-float-label validacao-error" *ngIf="empresaForm.controls['enderecoComplemento'].dirty && empresaForm.controls['enderecoComplemento'].errors" margin-left>
-                Complemento é obrigatório</span>
+
+            <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoComplemento'].dirty && empresaForm.controls['enderecoComplemento'].errors && empresaForm.controls['enderecoComplemento'].value == ''" 
+            margin-left>
+            Complemento é obrigatório</span>
+    
+                <span class="p-float-label validacao-error" 
+            *ngIf="empresaForm.controls['enderecoComplemento'].dirty && empresaForm.controls['enderecoComplemento'].errors && empresaForm.controls['enderecoComplemento'].value != '' " 
+            margin-left>
+                Tamanho máximo do campo 40</span>
+
         </div>
 
     </div>

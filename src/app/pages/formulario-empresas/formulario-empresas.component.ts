@@ -43,20 +43,23 @@ export class FormularioEmpresasComponent implements OnInit {
       id: new FormControl(pessoaJuridica.id),
       cnpj: new FormControl(pessoaJuridica.cnpj, [Validators.required]),
       contato: new FormControl(pessoaJuridica.contato, [Validators.required]),
-      email: new FormControl(pessoaJuridica.email, [Validators.required, Validators.email, Validators.max(40)]),
-      enderecoBairro: new FormControl(pessoaJuridica.enderecoBairro, [Validators.required, Validators.max(40)]),
+      email: new FormControl(pessoaJuridica.email, [Validators.required, Validators.email, Validators.maxLength(40)]),
+      enderecoBairro: new FormControl(pessoaJuridica.enderecoBairro, [Validators.required, Validators.maxLength(40)]),
       enderecoCep: new FormControl(pessoaJuridica.enderecoCep, [Validators.required]),
-      enderecoComplemento: new FormControl(pessoaJuridica.enderecoComplemento, Validators.max(40)),
-      enderecoLogradouro: new FormControl(pessoaJuridica.enderecoLogradouro, [Validators.required, Validators.max(40)]),
-      enderecoLocalidade: new FormControl(pessoaJuridica.enderecoLocalidade, [Validators.required, Validators.max(40)]),
-      enderecoUf: new FormControl(pessoaJuridica.enderecoUf, [Validators.required]),
+      enderecoComplemento: new FormControl(pessoaJuridica.enderecoComplemento, Validators.maxLength(40)),
+      enderecoLogradouro: new FormControl(pessoaJuridica.enderecoLogradouro, [Validators.required, Validators.maxLength(40)]),
+      enderecoLocalidade: new FormControl(pessoaJuridica.enderecoLocalidade, [Validators.required, Validators.maxLength(40)]),
+      enderecoUf: new FormControl(pessoaJuridica.enderecoUf, [Validators.required,Validators.maxLength(40)]),
       matrizId: new FormControl(pessoaJuridica.matrizId, [Validators.required]),
-      nome: new FormControl(pessoaJuridica.nome, [Validators.required, Validators.max(50)] ),
-      razaoSocial: new FormControl(pessoaJuridica.razaoSocial, [Validators.required, Validators.max(40)]),
+      nome: new FormControl(pessoaJuridica.nome, [ Validators.maxLength(50),Validators.required] ),
+      razaoSocial: new FormControl(pessoaJuridica.razaoSocial, [Validators.required, Validators.maxLength(40)]),
       tipoEmpresa: new FormControl(pessoaJuridica.tipoEmpresa, [Validators.required]),
     })
   }
 
+  teste(){
+    console.log(this.empresaForm.get('nome'));
+  }
 
   onSubmit() {
     var tipoEmpresaDto = this.empresaForm.get('tipoEmpresa')?.value;
