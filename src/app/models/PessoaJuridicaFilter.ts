@@ -1,11 +1,14 @@
 import { TipoEmpresa } from './TipoEmpresa';
 
 export class PessoaJuridicaFilter {
+    setPage(arg0: number) {
+      throw new Error('Method not implemented.');
+    }
     cnpj: string = '';
     nomeEmpresa: string = '';
     tipoEmpresa: string = '';
-    page:number = 0;
-    size:number = 5;
+    page:any = 5;
+    size:any = 0;
 
     constructor() {
       this.cnpj = "";
@@ -17,8 +20,8 @@ export class PessoaJuridicaFilter {
       cnpj:string,
       nomeEmpresa:string,
       tipoEmpresa:string,
-      page:number,
-      size:number) {
+      page:any,
+      size:any) {
 
       this.cnpj = cnpj;
       this.nomeEmpresa = nomeEmpresa;

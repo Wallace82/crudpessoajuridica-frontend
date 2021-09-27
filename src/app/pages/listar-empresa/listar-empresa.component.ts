@@ -21,15 +21,15 @@ export class ListarEmpresaComponent implements OnInit {
   paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
   empresas: PessoaJuridica[] = [];
+  
 
-  totalRecords!: number;
+  totalRecords: number = 0;
 
     cols!: any[];
 
   empresaFiltroForm!: FormGroup;
   first = 0;
-  rows = 50;
-  last = 100;
+
 
   constructor( 
     private empresaService: EmpresaService,
@@ -42,6 +42,13 @@ export class ListarEmpresaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+
+  this.loading = true;
+
+
+
     this.tipoEmpresas = [
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
@@ -52,12 +59,16 @@ export class ListarEmpresaComponent implements OnInit {
 
   loadEmpresas(event: LazyLoadEvent) {
     this.loading = true;
-console.log(event);
+     
+      this.empresaFiltro.page  =  (event.first==null?0:event.first/5);
+      this.empresaFiltro.size  =  event.rows;
+
+      console.log(event);
         setTimeout(() => {
         this.empresaService.listarFiltroEmpresa(this.empresaFiltro).subscribe(retorno =>  {
-            this.paginacao  = retorno
+          
+          this.paginacao  = retorno
             this.empresas = this.paginacao.content;
-           
             this.totalRecords = this.paginacao.totalElements;
             this.loading = false;
         }
@@ -93,8 +104,8 @@ console.log(event);
       this.empresaFiltroForm.get('cnpj')?.value,
       this.empresaFiltroForm.get('nomeEmpresa')?.value,
       this.empresaFiltroForm.get('tipoEmpresa')?.value,
-      0,
-      5
+      '0',
+      '5'
     );
     
     this.getEmpresas();
@@ -129,24 +140,5 @@ update(id: string) {
     console.log("alterou pagina");
   }
 
-  next() {
-    this.first = this.first + this.rows;
-}
-
-prev() {
-    this.first = this.first - this.rows;
-}
-
-reset() {
-    this.first = 0;
-}
-
-isLastPage(): boolean {
-  return this.empresas ? this.first === (this.empresas.length - this.rows): true;
-}
-
-isFirstPage(): boolean {
-  return this.empresas ? this.first === 0 : true;
-}
 
 }
