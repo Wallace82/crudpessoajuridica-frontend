@@ -6,12 +6,16 @@ import { CadastroEmpresaComponent } from './cadastro-empresa/cadastro-empresa.co
 import { PrimengModule } from '../primeng/primeng.module';
 import {RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormularioEmpresasComponent } from './formulario-empresas/formulario-empresas.component';
+import { EditarEmpresaComponent } from './editar-empresa/editar-empresa.component';
 
 
 @NgModule({
     declarations: [ 
         ListarEmpresaComponent,
-        CadastroEmpresaComponent
+        CadastroEmpresaComponent,
+        FormularioEmpresasComponent,
+        EditarEmpresaComponent
     ],
     exports: [ 
      ],
