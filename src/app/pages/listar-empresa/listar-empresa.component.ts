@@ -117,10 +117,10 @@ update(id: string) {
       accept: () => {
           this.empresaService.deleteEmpresa(id).subscribe(response => {
           
-            this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
+            this.messageService.add({severity:'success', summary:'Excluido com sucesso', detail:'Sucesso'});
             this.getEmpresas();
           }, error => {
-            this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
+            this.messageService.add({severity:'error', summary:'Erro', detail:'Essa é uma empresa matriz, com filiais ligadas a ela.'});
           })
       },
       reject: () => {
