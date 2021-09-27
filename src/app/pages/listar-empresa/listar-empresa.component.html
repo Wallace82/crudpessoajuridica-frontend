@@ -1,0 +1,104 @@
+<div class="p-jc-center p-grid vertical-container">
+    <div class="p-col-10">
+        <p-card class="p-shadow-10 ">
+            <ng-template pTemplate="header">
+                <p-panel header="Cadastro de Empresas">
+                   
+                    <div class="p-d-flex p-jc-between">
+                        <h3>Empresas Cadastradas</h3>
+                        
+                    </div>
+                    <form [formGroup]="empresaFiltroForm" >
+                    <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                                              
+                        <div class="p-field p-col-4 ">
+                            <span class="p-float-label">
+                                <p-inputMask  mask="99.999.999/9999-99" formControlName="cnpj"  autocomplete="off"></p-inputMask>
+                                <label for="cnpj"  class="label-obrigatorio" >CNPJ</label>
+                            </span>
+                        </div>
+
+                        <div class="p-field p-col-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="nomeEmpresa" pInputText />
+                                <label for="nomeEmpresa">Nome da Empresa</label>
+                            </span>
+                        </div>
+
+                    <div class="p-field p-col-4">
+                        <span class="p-float-label ">
+                            <p-dropdown [autoDisplayFirst]="false" [options]="tipoEmpresas"
+                                 [showClear]="true" optionLabel="label"
+                                optionValue="label" formControlName="tipoEmpresa" ></p-dropdown>
+                            <label for="inputtext" class="label-obrigatorio">Tipo de Empresa</label>
+                        </span>
+                        
+                    </div>
+
+                </div>
+                <div class="p-fluid p-grid p-mt-2 p-mr-5 p-d-flex p-jc-center">
+                            <div class="p-d-flex p-jc-center"> 
+                                <button pButton type="button" label="Novo Cadastro" 
+                                icon="pi pi-plus-circle" class="p-button-sm" 
+                                routerLink="/cadastrar">
+                                </button>
+                            </div>
+                                &nbsp;
+                            <div class="p-d-flex p-ml-5 p-jc-center">
+                                <button pButton type="button" label="Pesquisar" icon="pi pi-check" [loading]="isLoading"
+                                    (click)="pesquisar()"  class="p-button-sm"></button>
+                            </div>
+                 </div>
+                </form>
+                    <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
+                        
+                        <div class="card">
+                            <p-table 
+                            [value]="paginacao.content" 
+                            [paginator]="true" 
+                            [lazy]="true" (onLazyLoad)="loadEmpresas($event)"
+                            [rows]="5" 
+                            [totalRecords]="totalRecords"
+                            [showCurrentPageReport]="true" 
+                            [loading]="loading"
+                            [(first)]="first" 
+                            currentPageReportTemplate="Mostrando {first} até {last} de {totalRecords} registros" 
+                            [rowsPerPageOptions]="[5,10,15]"
+                            >
+                            
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nome</th>
+                                        <th>CNPJ</th>
+                                        <th style="text-align: center;">Ações</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-empresa>
+                                    <tr>
+                                        <td>{{empresa.id}}</td>
+                                        <td>{{empresa.nome}}</td>
+                                        <td>{{empresa.cnpjFormatado}}</td>
+                                        <td style="text-align: center;">
+                                            <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning" title="Editar" (click)="update(empresa.id)"></button>&nbsp;
+                                            <button pButton pRipple type="button"  icon="pi pi-trash"  class="p-button-rounded p-button-danger"   title="Deletar" iconPos="right" (click)="delete(empresa.id)"></button></td>
+                                        
+                                        
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+
+
+                    </div>
+
+                    <div class="p-d-flex p-mt-2 p-jc-start">
+                        <span>Qtd. Registros: {{paginacao.totalElements}}</span>
+                       
+                    </div>
+
+                </p-panel>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

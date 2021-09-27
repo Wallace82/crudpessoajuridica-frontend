@@ -3,22 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-
+import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app.component';
-import { FormCadastroComponent } from './form-cadastro/form-cadastro.component';
-import { ListCadastroComponent } from './cadasrto/list-cadastro/list-cadastro.component';
+
+import { CadastroModule } from './pages/cadastro.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FormCadastroComponent,
-    ListCadastroComponent
+    AppComponent 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ButtonModule,
-    TableModule
+    CadastroModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
