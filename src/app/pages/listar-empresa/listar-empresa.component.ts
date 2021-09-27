@@ -1,17 +1,19 @@
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Paginacao } from 'src/app/models/Paginacao';
 import { PessoaJuridica } from 'src/app/models/PessoaJuridica';
 import { PessoaJuridicaFilter } from 'src/app/models/PessoaJuridicaFilter';
-import { TipoEmpresa } from 'src/app/models/TipoEmpresa';
 import { TipoEmpresaDTO } from 'src/app/models/TipoEmpresaDTO';
 import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-listar-empresa',
-  templateUrl: './listar-empresa.component.html'
+  templateUrl: './listar-empresa.component.html', 
+  providers: [ConfirmationService, MessageService]
 })
 export class ListarEmpresaComponent implements OnInit {
- 
   isLoading = false;
   paginacao : Paginacao = new Paginacao();
   tipoEmpresas: TipoEmpresaDTO[] = [];
@@ -23,36 +25,58 @@ export class ListarEmpresaComponent implements OnInit {
   totalRecords = 7
 
   ngOnInit(): void {
-
-    
-
     this.tipoEmpresas = [
       { label: 'MATRIZ', value: '0' },
       { label: 'FILIAL', value: '1' },
     ];
-    this.empresaFiltro.setValores('','','MATRIZ',0,5);
-    console.log(this.empresaFiltro);
-     this.empresaService
-     .listarFiltroEmpresa(this.empresaFiltro)
-     .subscribe(  retorno =>  {
-      
-
-       this.paginacao  = retorno
-
-       console.log(this.paginacao.size);
-       console.log(this.paginacao.totalPages);
-
-       console.log(this.paginacao.totalElements);
-
-       this.empresas = this.paginacao.content;
-      }
-      );
+    this.getEmpresas();
+    this.primengConfig.ripple = true;
   }
 
   constructor( 
-    private empresaService: EmpresaService
+    private empresaService: EmpresaService,
+  private router: Router,
+  private confirmationService: ConfirmationService,
+  private primengConfig: PrimeNGConfig,
+  private messageService: MessageService
     ){
 
+  }
+
+  getEmpresas() {
+    this.empresaFiltro.setValores('','','MATRIZ',0,5);
+    this.empresaService
+    .listarFiltroEmpresa(this.empresaFiltro)
+    .subscribe(  retorno =>  {
+      this.paginacao  = retorno
+      this.empresas = this.paginacao.content;
+     }
+     );
+  }
+
+  update(id: string) {
+    this.router.navigate(['/editar/', id]);
+  }
+
+  delete(id: string) {
+    console.log('entrando')
+    this.confirmationService.confirm({
+      message: 'Deletar empresa?',
+      header: 'Deletar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+          this.empresaService.deleteEmpresa(id).subscribe(response => {
+            this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
+            this.getEmpresas();
+          }, error => {
+            console.log(error)
+            this.messageService.add({severity:'success', summary:'Success', detail:'Deletado'});
+          })
+      },
+      reject: () => {
+          
+      }
+  });
   }
 
   pesquisar(event: any) {

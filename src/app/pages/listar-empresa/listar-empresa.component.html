@@ -46,13 +46,13 @@
                 </div>
 
 
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
                     <div class="p-d-flex p-jc-end">
                         <button pButton type="button" label="Pesquisar" icon="pi pi-check" [loading]="isLoading"
                             (click)="pesquisar($event)"  class="p-button-sm"></button>
                     </div>
 
                     <div class="p-fluid p-grid p-mt-2 p-d-flex p-jc-between">
-                        
                         <div class="card">
                             <h5>Empresas Cadastradas</h5>
                             <div class="p-mb-3">
@@ -75,7 +75,12 @@
                                         <td>{{empresa.id}}</td>
                                         <td>{{empresa.nome}}</td>
                                         <td>{{empresa.cnpj}}</td>
-                                        <td>Editar - Excluir</td>
+
+                                        <td>
+                                           
+                                            <button pButton type="button" icon="pi pi-arrow-circle-right" label="Editar"  iconPos="right" (click)="update(empresa.id)"></button>
+                                            <button pButton type="button" icon="pi pi-trash" label="Deletar"  class="p-button-danger" iconPos="right" (click)="delete(empresa.id)"></button>
+                                        </td>
                                     </tr>
                                 </ng-template>
                             </p-table>

@@ -9,6 +9,10 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputMaskModule} from 'primeng/inputmask';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
+
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [],
@@ -23,7 +27,9 @@ import {InputMaskModule} from 'primeng/inputmask';
     ButtonModule,
     TableModule,
     DropdownModule,
-    InputMaskModule
+    InputMaskModule,
+    ConfirmDialogModule,
+    MessagesModule
  ],
 })
 export class PrimengModule { }

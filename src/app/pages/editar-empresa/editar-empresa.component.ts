@@ -22,7 +22,6 @@ export class EditarEmpresaComponent implements OnInit {
 
   getEmpresa() {
     this.route.data.subscribe((resolvedRouteData) => {
-      console.log(this.pessoaJuridica)
       this.pessoaJuridica = resolvedRouteData.data;
       this.pessoaJuridica.enderecoBairro = resolvedRouteData.data.endereco.bairro;
       this.pessoaJuridica.enderecoCep = resolvedRouteData.data.endereco.cep;
@@ -32,7 +31,4 @@ export class EditarEmpresaComponent implements OnInit {
       this.pessoaJuridica.enderecoUf = resolvedRouteData.data.endereco.uf;
     })
   }
-
-
-
 }

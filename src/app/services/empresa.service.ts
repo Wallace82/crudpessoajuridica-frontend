@@ -26,6 +26,11 @@ export class EmpresaService {
     return this.http.put(`${API_CONFIG.baseUrl}/cadastro`, empresa);
   }
 
+  
+  deleteEmpresa(id: string) {
+    return this.http.delete(`${API_CONFIG.baseUrl}/cadastro/${id}`);
+  }
+
   getListaMatriz(): Observable<PessoaJuridica[]> {
     return this.http.get<PessoaJuridica[]>(`${API_CONFIG.baseUrl}/cadastro/matrizes`);
   }

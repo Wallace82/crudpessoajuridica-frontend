@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { EmpresaService } from '../services/empresa.service';
 import { PessoaJuridica } from './../models/PessoaJuridica';
@@ -9,11 +9,17 @@ import { PessoaJuridica } from './../models/PessoaJuridica';
 })
 export class ResolverEmpresa implements Resolve<any> {
 
-  constructor(private empresaService: EmpresaService) { }
+  constructor(private empresaService: EmpresaService, private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot) {
+    var dataSource!: Observable<PessoaJuridica>;
     let id = route.paramMap.get('id');
-    const dataSource: Observable<PessoaJuridica> = this.empresaService.getEmpresaId(id);
+    if(id != '0') {
+      dataSource = this.empresaService.getEmpresaId(id);
+    } else {
+      
+      this.router.navigate(['/']);
+    }
     return dataSource;
 }
 }
